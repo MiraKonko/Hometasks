@@ -8,13 +8,13 @@ namespace ExcelReader
     {
         static void Main(string[] args)
         {
-            ConsoleKeyInfo keyInfo;
+            //ConsoleKeyInfo keyInfo;
             //string file name = "TestData.xlsx"
             Console.WriteLine("Welcome to report loader! Continue - press any key, for exit - press ESC. ");
 
             do
             {
-                keyInfo = Console.ReadKey(true);
+                //keyInfo = Console.ReadKey(true);
                 while (!Console.KeyAvailable)
                 {
                     bool isFileNumberRead = false;
@@ -84,7 +84,8 @@ namespace ExcelReader
                 }
 
             }
-            while (keyInfo.Key != ConsoleKey.Escape);
+            while (Console.ReadKey(true).Key != ConsoleKey.Escape);
+            Console.ReadLine();
         }
 
         public static void PrintExcelReportToConsole(string pathToFile, string sheetName)
