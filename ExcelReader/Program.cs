@@ -85,7 +85,6 @@ namespace ExcelReader
 
             }
             while (Console.ReadKey(true).Key != ConsoleKey.Escape);
-            Console.ReadLine();
         }
 
         public static void PrintExcelReportToConsole(string pathToFile, string sheetName)
