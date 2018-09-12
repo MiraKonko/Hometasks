@@ -1,6 +1,6 @@
-﻿using LinqToExcel;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 
 namespace ExcelReader
 {
@@ -8,100 +8,42 @@ namespace ExcelReader
     {
         static void Main(string[] args)
         {
-            //ConsoleKeyInfo keyInfo;
-            //string file name = "TestData.xlsx"
-            Console.WriteLine("Welcome to report loader! Continue - press any key, for exit - press ESC. ");
+            Console.WriteLine("Welcome to report loader!");
+            Console.WriteLine("For getting list of books by genre - enter 1." + Environment.NewLine +
+                              "For getting the most profitable author - enter 2." + Environment.NewLine +
+                              "For getting list of available authours - enter 3." + Environment.NewLine +
+                              "For getting not filered list of books - enter 4." + Environment.NewLine +
+                              "For start - press any key, for Exit - click ESC.");
 
-            do
+            while (Console.ReadKey(true).Key != ConsoleKey.Escape)
             {
-                //keyInfo = Console.ReadKey(true);
-                while (!Console.KeyAvailable)
+                try
                 {
-                    bool isFileNumberRead = false;
-                    int reportNumber = 0;
-                    while (!isFileNumberRead)
-                    {
-                        Console.WriteLine("Please, enter number of reports you'd like to load (from 1 to 3 can       )...");
-                        var result = int.TryParse(Console.ReadLine(), out reportNumber);
-                        if (result)
-                        {
-                            if (reportNumber > 3 && reportNumber < 1)
-                            {
-                                Console.WriteLine("Please, enter number from 1 to 3!");
-                            }
-                            else
-                            {
-                                isFileNumberRead = true;
-                            }
-                        }
-                        else
-                        {
-                            Console.WriteLine("Please, enter number from 1 to 3!");
-                        }
-                    }
-                    List<string> filesToExport = new List<string>();
+                    Console.WriteLine("Enter report number!");
+                    var reportTypeCode = Console.ReadLine();
+                    Console.WriteLine("Please, enter file name for report (with .xlsx or .xls part)...");
+                    var fileName = Console.ReadLine();
 
-                    for (int i = 0; i < reportNumber; i++)
-                    {
-                        Console.WriteLine($"Please, enter file name to print (with .xlsx)...");
-                        var isRetryRequired = true;
-                        while (isRetryRequired)
-                        {
+                    var reportsReader = new BooksStoreReportsReader(fileName, 1);
 
-                            string userInput = Console.ReadLine();
-                            var isFileWithNamePresent = FileReaderHelper.IsFileWithNamePresentInTheDirectory(userInput);
-                            if (!isFileWithNamePresent)
-                            {
-                                Console.WriteLine($"There is no file with name '{userInput}'!");
-                                Console.WriteLine("If you'd like to retry - press 1, continue anyway - press any key!");
-                                var userAction = int.Parse(Console.ReadLine());
-                                if (userAction == 1)
-                                {
-                                    Console.WriteLine("Please, re-enter file name...");
-                                }
-                                else
-                                {
-                                    isRetryRequired = false;
-                                }
-                            }
-                            else
-                            {
-                                isRetryRequired = false;
-                                filesToExport.Add(userInput);
-                            }
-                        }
-
-                    }
-
-                    foreach (var file in filesToExport)
-                    {
-                        string pathToFile = FileReaderHelper.BuildPathToFile(file);
-                        string sheetName = "Sheet1";
-                        PrintExcelReportToConsole(pathToFile, sheetName);
-
-                    }
-                    Console.ReadLine();
+                    reportsReader.PrintReportOnConsoleByReportTypeCode(reportTypeCode);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Something went wrong! {ex.Message}, additional info: {ex.InnerException?.Message}.");
+                }
+                finally
+                {
+                    Console.WriteLine("Please, try again!");
                 }
 
-            }
-            while (Console.ReadKey(true).Key != ConsoleKey.Escape);
-            Console.ReadLine();
-        }
-
-        public static void PrintExcelReportToConsole(string pathToFile, string sheetName)
-        {
-            var doc = new ExcelQueryFactory(pathToFile);
-            var sheet = doc.Worksheet<Row>();
-            foreach (var row in sheet)
+            };
+            Console.Write("Are sure? Press 'Y' for exit or 'N' for returning!");
+            var userInput = Console.ReadLine();
+            if (userInput == "Y")
             {
-                foreach (var column in doc.GetColumnNames(sheetName))
-                {
-                    Console.Write($"| {row[column]} ");
-                }
-                Console.WriteLine();
+                Environment.Exit(0);
             }
         }
     }
-
-
 }
