@@ -1,8 +1,9 @@
-﻿using System;
+﻿using ExcelReader.EntityMappers;
+using OfficeOpenXml;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using OfficeOpenXml;
 
 namespace ExcelReader
 {
@@ -12,7 +13,7 @@ namespace ExcelReader
 
         public BooksStoreReportsReader(string fileName, int sheetNumber)
         {
-            ListOfBooks = GetListOfBooksFromSql(fileName, sheetNumber);
+            ListOfBooks = GetListOfBooksFromExcel(fileName, sheetNumber);
             if (ListOfBooks.Count == 0)
             {
                 throw new Exception($"There is no books in file '{fileName}'");
@@ -80,47 +81,15 @@ namespace ExcelReader
             return author;
         }
 
-        private List<BookDto> GetListOfBooksFromSql(string fileName, int sheetNumber)
+        private List<BookDto> GetListOfBooksFromExcel(string fileName, int sheetNumber)
         {
-            //using (SqlConnection sqlConn = new SqlConnection(connectionStr))
-            //{
-            //    sqlConn.Open();
-            //    using (SqlCommand sqlCmd = new SqlCommand(_sqlSelectCommand, sqlConn))
-            //    {
-            //        using (SqlDataReader sqlReader = sqlCmd.ExecuteReader())
-            //        {
-            //            while (sqlReader.Read())
-            //            {
-            //                var entityMapper = new EntityMapper();
-            //                ListOfBooks.Add(entityMapper.MapSqlDataToBookDto(sqlReader));
-            //            }
-            //        }
-            //    }
-            //}
             using (ExcelPackage package = new ExcelReader().GetExcelPackage(fileName))
             {
                 ExcelWorksheet worksheet = package.Workbook.Worksheets[sheetNumber];
-                Dictionary<int, string> ColumnIndexNames = new Dictionary<int, string>();
-                for (int i = 1; i <= worksheet.Dimension.End.Column; i++)
-                {
-                    ColumnIndexNames.Add(i, worksheet.Cells[1, i].Value.ToString());
-                }
                 var rowsCount = worksheet.Cells.Select(cell => cell.Start.Row).OrderBy(x => x).Skip(1).Count();
                 for (int i = 2; i <= rowsCount; i++)
                 {
-                    int id = ColumnIndexNames.FirstOrDefault(item => item.Value == "ID").Key;
-
-                    var book = new BookDto
-                    {
-                        Id = int.Parse(worksheet.Cells[i, id].Text),
-                        Author = worksheet.Cells[i, ColumnIndexNames.FirstOrDefault(item => item.Value == "Author").Key].Text,
-                        Title = worksheet.Cells[i, ColumnIndexNames.FirstOrDefault(item => item.Value == "Title").Key].Text,
-                        Price = int.Parse(worksheet.Cells[i, ColumnIndexNames.FirstOrDefault(item => item.Value == "Price").Key].Text),
-                        Genre = worksheet.Cells[i, ColumnIndexNames.FirstOrDefault(item => item.Value == "Genre").Key].Text,
-                        IsAvailalbe = bool.Parse(worksheet.Cells[i, ColumnIndexNames.FirstOrDefault(item => item.Value == "Available").Key].Text),
-                        AvailableBooksCount = int.Parse(worksheet.Cells[i, ColumnIndexNames.FirstOrDefault(item => item.Value == "Sold Books Count").Key].Text),
-                        SoldBooksCount = int.Parse(worksheet.Cells[i, ColumnIndexNames.FirstOrDefault(item => item.Value == "Total Sold Price").Key].Text)
-                    };
+                    var book = new EntityMapper().MapExcelDataToBookDto(worksheet, i);
                     ListOfBooks.Add(book);
                 }
                 return ListOfBooks;

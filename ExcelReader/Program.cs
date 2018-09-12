@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
 
 namespace ExcelReader
 {
@@ -23,8 +21,8 @@ namespace ExcelReader
                     var reportTypeCode = Console.ReadLine();
                     Console.WriteLine("Please, enter file name for report (with .xlsx or .xls part)...");
                     var fileName = Console.ReadLine();
-
-                    var reportsReader = new BooksStoreReportsReader(fileName, 1);
+                    var defaultSheetNumber = 1;
+                    var reportsReader = new BooksStoreReportsReader(fileName, defaultSheetNumber);
 
                     reportsReader.PrintReportOnConsoleByReportTypeCode(reportTypeCode);
                 }
@@ -34,16 +32,11 @@ namespace ExcelReader
                 }
                 finally
                 {
-                    Console.WriteLine("Please, try again!");
+                    Console.WriteLine("Please, press any key to try again!");
                 }
 
             };
-            Console.Write("Are sure? Press 'Y' for exit or 'N' for returning!");
-            var userInput = Console.ReadLine();
-            if (userInput == "Y")
-            {
-                Environment.Exit(0);
-            }
+            Environment.Exit(0);
         }
     }
 }

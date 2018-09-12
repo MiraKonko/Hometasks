@@ -1,12 +1,11 @@
-﻿using System.IO;
-using System.Configuration;
-using System;
+﻿using System.Configuration;
+using System.IO;
 
 namespace ExcelReader
 {
     public class FileReaderHelper
     {
-        public string defaultFolderName = ConfigurationSettings.AppSettings["defaultTestDataDirectory"];
+        public string defaultFolderName = ConfigurationManager.AppSettings["defaultTestDataDirectory"];
 
         public string BuildFullPathToFile(string fileName, string fileDirectory = null)
         {
