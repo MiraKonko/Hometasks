@@ -87,9 +87,6 @@
     <Folder Include="EntityMappers\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="TestData\Test.xlsx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="TestData\BookStore2.xlsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
