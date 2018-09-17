@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using ExcelDataReader;
 
 namespace ExcelReader
 {
@@ -10,14 +7,6 @@ namespace ExcelReader
         public void PrintReportStringToConsole(string report)
         {
             Console.WriteLine(report);
-        }
-
-        public void PrintListToConsole(List<string> listToPrint)
-        {
-            foreach (var item in listToPrint)
-            {
-                Console.WriteLine(item);
-            }
         }
     }
 }

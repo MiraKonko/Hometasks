@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ExcelReader.FileReaders;
+using System;
 
 namespace ExcelReader
 {
@@ -6,11 +7,12 @@ namespace ExcelReader
     {
         static void Main(string[] args)
         {
+            var defaultSheetNumber = 1;
             Console.WriteLine("Welcome to report loader!");
             Console.WriteLine("For getting list of books by genre - enter 1." + Environment.NewLine +
                               "For getting the most profitable author - enter 2." + Environment.NewLine +
-                              "For getting list of available authours - enter 3." + Environment.NewLine +
-                              "For getting not filered list of books - enter 4." + Environment.NewLine +
+                              "For getting list of available authors - enter 3." + Environment.NewLine +
+                              "For getting not filtered list of books - enter 4." + Environment.NewLine +
                               "For start - press any key, for Exit - click ESC.");
 
             while (Console.ReadKey(true).Key != ConsoleKey.Escape)
@@ -19,12 +21,24 @@ namespace ExcelReader
                 {
                     Console.WriteLine("Enter report number!");
                     var reportTypeCode = Console.ReadLine();
-                    Console.WriteLine("Please, enter file name for report (with .xlsx or .xls part)...");
+                    Console.WriteLine("Please, enter file name for report (with .xlsx or .xls part)." + Environment.NewLine +
+                        "For getting report from several files - enter file names separated by comma" + Environment.NewLine +
+                        "For getting report from all available files enter '.' character.");
                     var fileName = Console.ReadLine();
-                    var defaultSheetNumber = 1;
-                    var reportsReader = new BooksStoreReportsReader(fileName, defaultSheetNumber);
+                    if (fileName == ".")
+                    {
 
-                    reportsReader.PrintReportOnConsoleByReportTypeCode(reportTypeCode);
+                    }
+                    else if (true)
+                    {
+
+                    }
+                    else
+                    {
+                        new BookStoreReader().ReadListOfBooksFromExcelAndStoreInContext(fileName, defaultSheetNumber);
+                        var reportsReader = new BooksStoreReportsReader();
+                        reportsReader.PrintReportOnConsoleByReportTypeCode(reportTypeCode);
+                    }
                 }
                 catch (Exception ex)
                 {
