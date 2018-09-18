@@ -1,6 +1,5 @@
 ﻿using OfficeOpenXml;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace ExcelReader.EntityMappers
 {
@@ -8,21 +7,21 @@ namespace ExcelReader.EntityMappers
     {
         public BookDto MapExcelDataToBookDto(ExcelWorksheet worksheet, int rowIndex)
         {
-            Dictionary<int, string> ColumnIndexNames = new Dictionary<int, string>();
+            Dictionary<string, int> ColumnIndexNames = new Dictionary<string, int>();
             for (int i = 1; i <= worksheet.Dimension.End.Column; i++)
             {
-                ColumnIndexNames.Add(i, worksheet.Cells[1, i].Value.ToString());
+                ColumnIndexNames.Add(worksheet.Cells[1, i].Value.ToString(), i);
             }
             return new BookDto
             {
-                Id = int.Parse(worksheet.Cells[rowIndex, ColumnIndexNames.FirstOrDefault(item => item.Value == "ID").Key].Text),
-                Author = worksheet.Cells[rowIndex, ColumnIndexNames.FirstOrDefault(item => item.Value == "Author").Key].Text,
-                Title = worksheet.Cells[rowIndex, ColumnIndexNames.FirstOrDefault(item => item.Value == "Title").Key].Text,
-                Price = int.Parse(worksheet.Cells[rowIndex, ColumnIndexNames.FirstOrDefault(item => item.Value == "Price").Key].Text),
-                Genre = worksheet.Cells[rowIndex, ColumnIndexNames.FirstOrDefault(item => item.Value == "Genre").Key].Text,
-                IsAvailalbe = bool.Parse(worksheet.Cells[rowIndex, ColumnIndexNames.FirstOrDefault(item => item.Value == "Available").Key].Text),
-                AvailableBooksCount = int.Parse(worksheet.Cells[rowIndex, ColumnIndexNames.FirstOrDefault(item => item.Value == "Sold Books Count").Key].Text),
-                SoldBooksCount = int.Parse(worksheet.Cells[rowIndex, ColumnIndexNames.FirstOrDefault(item => item.Value == "Total Sold Price").Key].Text)
+                Id = int.Parse(worksheet.Cells[rowIndex, ColumnIndexNames["ID"]].Text),
+                Author = worksheet.Cells[rowIndex, ColumnIndexNames["Author"]].Text,
+                Title = worksheet.Cells[rowIndex, ColumnIndexNames["Title"]].Text,
+                Price = int.Parse(worksheet.Cells[rowIndex, ColumnIndexNames["Price"]].Text),
+                Genre = worksheet.Cells[rowIndex, ColumnIndexNames["Genre"]].Text,
+                IsAvailalbe = bool.Parse(worksheet.Cells[rowIndex, ColumnIndexNames["Available"]].Text),
+                AvailableBooksCount = int.Parse(worksheet.Cells[rowIndex, ColumnIndexNames["Sold Books Count"]].Text),
+                SoldBooksCount = int.Parse(worksheet.Cells[rowIndex, ColumnIndexNames["Total Sold Price"]].Text)
             };
         }
     }
