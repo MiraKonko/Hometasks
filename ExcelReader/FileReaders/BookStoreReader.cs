@@ -14,6 +14,12 @@ namespace ExcelReader.FileReaders
             Context.Current.Set(ContextKeys.STORED_BOOK_LIST, listOfBooks);
         }
 
+        public void ReadListOfBooksFromExcelAndStoreInContext(string[] fileNames, int sheetNumber)
+        {
+            List<BookDto> listOfBooks = GetListOfBooksFromExcel(fileNames, sheetNumber);
+            Context.Current.Set(ContextKeys.STORED_BOOK_LIST, listOfBooks);
+        }
+
         public List<BookDto> GetListOfBooksFromExcel(string[] fileNames, int sheetNumber)
         {
             List<BookDto> listOfBooks = new List<BookDto>();

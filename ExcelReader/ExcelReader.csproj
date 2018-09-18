@@ -71,7 +71,7 @@
     <Compile Include="ConsolePrinter.cs" />
     <Compile Include="FileReaders\ExcelReader.cs" />
     <Compile Include="FileReaders\FileReaderHelper.cs" />
-    <Compile Include="FileReaders\BooksStoreReportsReader.cs" />
+    <Compile Include="BooksStoreReports.cs" />
     <Compile Include="EntityMappers\EntityMapper.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -6,48 +6,36 @@ using System.Linq;
 
 namespace ExcelReader
 {
-    public class BooksStoreReportsReader
+    public class BooksStoreReports
     {
-        public void PrintReportOnConsoleByReportTypeCode(string reportTypeCode)
+        public List<string> GetReportByReportTypeCode(string reportTypeCode)
         {
-            var consolePrinter = new ConsolePrinter();
+            List<string> report;
             switch (reportTypeCode)
             {
                 case "1":
                     Console.WriteLine("Enter genre...");
                     var genre = Console.ReadLine();
-                    List<BookDto> listOfBooksFilteredByGenre = GetListOfBooksByGenre(genre);
-                    for (int i = 1; i <= listOfBooksFilteredByGenre.Count; i++)
-                    {
-                        consolePrinter.PrintReportStringToConsole(listOfBooksFilteredByGenre[i].ToString());
-                    }
+                    report = GetListOfBooksByGenre(genre);
                     break;
                 case "2":
-                    List<string> availalbeAutors = GetListOfAvailableAuthors();
-                    for (int i = 1; i <= availalbeAutors.Count; i++)
-                    {
-                        consolePrinter.PrintReportStringToConsole(availalbeAutors[i]);
-                    }
+                    report = GetListOfAvailableAuthors();
                     break;
                 case "3":
-                    string theMostProfitableAuthor = GetTheMostProfitableAuthor();
-                    consolePrinter.PrintReportStringToConsole(theMostProfitableAuthor);
+                    report = GetTheMostProfitableAuthor();
                     break;
                 case "4":
-                    var listOfBooks = Context.Current.Get<List<BookDto>>(ContextKeys.STORED_BOOK_LIST);
-                    for (int i = 1; i <= listOfBooks.Count; i++)
-                    {
-                        consolePrinter.PrintReportStringToConsole(listOfBooks[i].ToString());
-                    }
+                    report = Context.Current.Get<List<BookDto>>(ContextKeys.STORED_BOOK_LIST).Select(book => book.ToString()).ToList();
                     break;
                 default:
                     throw new Exception("Unknown operation code! Please, enter from the list of available ones!");
             }
+            return report;
         }
 
-        public List<BookDto> GetListOfBooksByGenre(string genre)
+        public List<string> GetListOfBooksByGenre(string genre)
         {
-            var filteredListOfBooks = Context.Current.Get<List<BookDto>>(ContextKeys.STORED_BOOK_LIST).Where(book => book.Genre == genre).ToList();
+            var filteredListOfBooks = Context.Current.Get<List<BookDto>>(ContextKeys.STORED_BOOK_LIST).Where(book => book.Genre == genre).Select(book => book.ToString()).ToList();
             if (filteredListOfBooks.Count == 0)
             {
                 throw new Exception($"There is no book with genre '{genre}'!");
@@ -65,11 +53,13 @@ namespace ExcelReader
             return listAvailableAuthors;
         }
 
-        public string GetTheMostProfitableAuthor()
+        public List<string> GetTheMostProfitableAuthor()
         {
+            List<string> report = new List<string>();
             var author = Context.Current.Get<List<BookDto>>(ContextKeys.STORED_BOOK_LIST).GroupBy(book => book.Author)
                 .Select(book => new { Author = book.Key, TotalProfit = book.Sum(b => b.TotalSoldPrice) }).OrderByDescending(book => book.TotalProfit).FirstOrDefault().Author;
-            return author;
+            report.Add(author);
+            return report;
         }
     }
 }

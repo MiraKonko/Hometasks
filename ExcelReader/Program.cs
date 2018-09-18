@@ -1,5 +1,6 @@
 ﻿using ExcelReader.FileReaders;
 using System;
+using System.Collections.Generic;
 
 namespace ExcelReader
 {
@@ -27,17 +28,23 @@ namespace ExcelReader
                     var fileName = Console.ReadLine();
                     if (fileName == ".")
                     {
-
+                        var fileNames = "";
+                        new BookStoreReader().ReadListOfBooksFromExcelAndStoreInContext(fileNames, defaultSheetNumber);
                     }
-                    else if (true)
+                    else if (fileName.Contains("."))
                     {
-
+                        var fileNames = fileName.Split(',');
+                        new BookStoreReader().ReadListOfBooksFromExcelAndStoreInContext(fileNames, defaultSheetNumber);
                     }
                     else
                     {
                         new BookStoreReader().ReadListOfBooksFromExcelAndStoreInContext(fileName, defaultSheetNumber);
-                        var reportsReader = new BooksStoreReportsReader();
-                        reportsReader.PrintReportOnConsoleByReportTypeCode(reportTypeCode);
+                    }
+                    List<string> report = new BooksStoreReports().GetReportByReportTypeCode(reportTypeCode);
+                    var consolePrinter = new ConsolePrinter();
+                    for (int i = 1; i <= report.Count; i++)
+                    {
+                        consolePrinter.PrintReportStringToConsole(report[i]);
                     }
                 }
                 catch (Exception ex)
