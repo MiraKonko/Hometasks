@@ -30,13 +30,14 @@ namespace ExcelReader
             StringBuilder strBuilder = new StringBuilder();
             strBuilder.Append($"Id: {Id.ToString()},")
                       .Append($"Author: {Author.ToString()},")
-                      .Append($"Title: {Title.ToString()},")
+                      .Append($"Title: {Title},")
                       .Append($"Price: {Price.ToString()},")
                       .Append($"Available: {IsAvailalbe.ToString()},")
-                      .Append($"Genre: {Genre.ToString()},")
+                      .Append($"Genre: {Genre},")
                       .Append($"Available Books Count: {AvailableBooksCount.ToString()},")
                       .Append($"Sold Books Count: {SoldBooksCount.ToString()},")
                       .Append($"Total Sold Price: {TotalSoldPrice.ToString()}.");
+
             return strBuilder.ToString();
         }
     }

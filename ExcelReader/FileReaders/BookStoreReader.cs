@@ -8,19 +8,13 @@ namespace ExcelReader.FileReaders
 {
     public class BookStoreReader
     {
-        public void ReadListOfBooksFromExcelAndStoreInContext(string fileName, int sheetNumber)
+        public void ReadAndStoreListOfBooksFromExcel(List<string> fileNames, int sheetNumber)
         {
-            List<BookDto> listOfBooks = GetListOfBooksFromExcel(fileName, sheetNumber);
-            Context.Current.Set(ContextKeys.STORED_BOOK_LIST, listOfBooks);
+            List<BookDto> listOfBooks = GetListOfBooksFromMultipleExcels(fileNames, sheetNumber);
+            new BookStorage().StoredBooks = listOfBooks;
         }
 
-        public void ReadListOfBooksFromExcelAndStoreInContext(List<string> fileNames, int sheetNumber)
-        {
-            List<BookDto> listOfBooks = GetListOfBooksFromExcel(fileNames, sheetNumber);
-            Context.Current.Set(ContextKeys.STORED_BOOK_LIST, listOfBooks);
-        }
-
-        public List<BookDto> GetListOfBooksFromExcel(List<string> fileNames, int sheetNumber)
+        public List<BookDto> GetListOfBooksFromMultipleExcels(List<string> fileNames, int sheetNumber)
         {
             List<BookDto> listOfBooks = new List<BookDto>();
             for (int i = 0; i < fileNames.Count(); i++)
@@ -36,12 +30,14 @@ namespace ExcelReader.FileReaders
             {
                 ExcelWorksheet worksheet = package.Workbook.Worksheets[sheetNumber];
                 List<BookDto> ListOfBooks = new List<BookDto>();
-                var rowsCount = worksheet.Cells.Select(cell => cell.Start.Row).OrderBy(x => x).Skip(1).Count();
-                for (int i = 2; i <= rowsCount; i++)
+                var lastRow = worksheet.Dimension.End.Row;
+
+                for (int i = 2; i <= lastRow; i++)
                 {
                     var book = new EntityMapper().MapExcelDataToBookDto(worksheet, i);
                     ListOfBooks.Add(book);
                 }
+
                 return ListOfBooks;
             }
         }

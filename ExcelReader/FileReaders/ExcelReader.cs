@@ -8,7 +8,7 @@ namespace ExcelReader
     {
         public ExcelPackage GetExcelPackage(string fileName)
         {
-            string pathToFile = new FileReaderHelper().BuildFullPathToFile(fileName);
+            string pathToFile = new FileReader().BuildFullPathToFile(fileName);
             FileInfo file = new FileInfo(pathToFile);
             if (file == null)
             {

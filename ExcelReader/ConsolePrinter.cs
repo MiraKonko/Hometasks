@@ -4,9 +4,9 @@ namespace ExcelReader
 {
     public class ConsolePrinter
     {
-        public void PrintReportStringToConsole(string report)
+        public void PrintStringToConsole(string stringToPrint)
         {
-            Console.WriteLine(report);
+            Console.WriteLine(stringToPrint);
         }
     }
 }

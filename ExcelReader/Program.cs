@@ -15,37 +15,35 @@ namespace ExcelReader
                               "For getting the most profitable author - enter 2." + Environment.NewLine +
                               "For getting list of available authors - enter 3." + Environment.NewLine +
                               "For getting not filtered list of books - enter 4." + Environment.NewLine +
-                              "For start - press any key, for Exit - click ESC.");
+                              "Enter report number:");
 
             while (Console.ReadKey(true).Key != ConsoleKey.Escape)
             {
                 //try
                 //{
-                Console.WriteLine("Enter report number!");
+                var consolePrinter = new ConsolePrinter();
+                var fileReader = new FileReader();
+                var allAvailalbeFilesNames = fileReader.GetAllExcelFileNamesFromFolder();
                 var reportTypeCode = Console.ReadLine();
+
                 Console.WriteLine("Please, enter file name for report (with .xlsx or .xls part)." + Environment.NewLine +
                     "For getting report from several files - enter file names separated by comma" + Environment.NewLine +
-                    "For getting report from all available files enter '.' character.");
-                var fileName = Console.ReadLine();
-                if (fileName == ".")
+                    "For getting report from all available files enter '.' character." + Environment.NewLine +
+                    $"Here are availalbe files:");
+
+                for (int i = 0; i < allAvailalbeFilesNames.Count; i++)
                 {
-                    var fileNames = new FileReaderHelper().GetAllExcelFileNamesFromFolder();
-                    new BookStoreReader().ReadListOfBooksFromExcelAndStoreInContext(fileNames, defaultSheetNumber);
+                    consolePrinter.PrintStringToConsole(allAvailalbeFilesNames[i]);
                 }
-                else if (fileName.Contains("."))
-                {
-                    var fileNames = fileName.Split(',').ToList();
-                    new BookStoreReader().ReadListOfBooksFromExcelAndStoreInContext(fileNames, defaultSheetNumber);
-                }
-                else
-                {
-                    new BookStoreReader().ReadListOfBooksFromExcelAndStoreInContext(fileName, defaultSheetNumber);
-                }
+
+                var fileNames = Console.ReadLine();
+                List<string> fileNamesForReport = fileReader.GetListOfFilesNamesFromUserInput(fileNames);
+                new BookStoreReader().ReadAndStoreListOfBooksFromExcel(fileNamesForReport, defaultSheetNumber);
                 List<string> report = new BooksStoreReports().GetReportByReportTypeCode(reportTypeCode);
-                var consolePrinter = new ConsolePrinter();
+
                 for (int i = 0; i < report.Count; i++)
                 {
-                    consolePrinter.PrintReportStringToConsole(report[i]);
+                    consolePrinter.PrintStringToConsole(report[i]);
                 }
                 //}
                 //catch (Exception ex)

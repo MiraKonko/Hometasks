@@ -57,8 +57,6 @@
     <Reference Include="System.Security" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CachedDataStorage\Context.cs" />
-    <Compile Include="CachedDataStorage\ContextKeys.cs" />
     <Compile Include="FileReaders\BookStoreReader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -70,10 +68,11 @@
     <Compile Include="DTOs\BookDto.cs" />
     <Compile Include="ConsolePrinter.cs" />
     <Compile Include="FileReaders\ExcelReader.cs" />
-    <Compile Include="FileReaders\FileReaderHelper.cs" />
+    <Compile Include="FileReaders\FileReader.cs" />
     <Compile Include="BooksStoreReports.cs" />
     <Compile Include="EntityMappers\EntityMapper.cs" />
     <Compile Include="DTOs\AuthorDto.cs" />
+    <Compile Include="CachedDataStorage\BookStorage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
