@@ -6,7 +6,7 @@ namespace ExcelReader
     {
         public int Id { get; set; }
 
-        public string Author { get; set; }
+        public AuthorDto Author { get; set; }
 
         public string Title { get; set; }
 

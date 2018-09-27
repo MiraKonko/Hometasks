@@ -1,5 +1,6 @@
 ﻿using OfficeOpenXml;
 using System.Collections.Generic;
+using System;
 
 namespace ExcelReader.EntityMappers
 {
@@ -15,11 +16,15 @@ namespace ExcelReader.EntityMappers
             return new BookDto
             {
                 Id = int.Parse(worksheet.Cells[rowIndex, ColumnIndexNames["ID"]].Text),
-                Author = worksheet.Cells[rowIndex, ColumnIndexNames["Author"]].Text,
+                Author = new AuthorDto
+                {
+                    FirstName = worksheet.Cells[rowIndex, ColumnIndexNames["Author"]].Text.Split(' ')[0],
+                    LastName = worksheet.Cells[rowIndex, ColumnIndexNames["Author"]].Text.Split(' ')[1]
+                },
                 Title = worksheet.Cells[rowIndex, ColumnIndexNames["Title"]].Text,
                 Price = int.Parse(worksheet.Cells[rowIndex, ColumnIndexNames["Price"]].Text),
                 Genre = worksheet.Cells[rowIndex, ColumnIndexNames["Genre"]].Text,
-                IsAvailalbe = bool.Parse(worksheet.Cells[rowIndex, ColumnIndexNames["Available"]].Text),
+                IsAvailalbe = Convert.ToBoolean(worksheet.Cells[rowIndex, ColumnIndexNames["Available"]].Text.ToLower()),
                 AvailableBooksCount = int.Parse(worksheet.Cells[rowIndex, ColumnIndexNames["Sold Books Count"]].Text),
                 SoldBooksCount = int.Parse(worksheet.Cells[rowIndex, ColumnIndexNames["Total Sold Price"]].Text)
             };

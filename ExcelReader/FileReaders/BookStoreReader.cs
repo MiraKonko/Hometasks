@@ -23,7 +23,7 @@ namespace ExcelReader.FileReaders
         public List<BookDto> GetListOfBooksFromExcel(List<string> fileNames, int sheetNumber)
         {
             List<BookDto> listOfBooks = new List<BookDto>();
-            for (int i = 1; i <= fileNames.Count(); i++)
+            for (int i = 0; i < fileNames.Count(); i++)
             {
                 listOfBooks.AddRange(GetListOfBooksFromExcel(fileNames[i], sheetNumber));
             }
