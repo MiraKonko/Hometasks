@@ -23,7 +23,7 @@ namespace ExcelReader
                 //{
                 var consolePrinter = new ConsolePrinter();
                 var fileReader = new FileReader();
-                var allAvailalbeFilesNames = fileReader.GetAllExcelFileNamesFromFolder();
+                var allAvailableFilesNames = fileReader.GetAllExcelFileNamesFromFolder();
                 var reportTypeCode = Console.ReadLine();
 
                 Console.WriteLine("Please, enter file name for report (with .xlsx or .xls part)." + Environment.NewLine +
@@ -31,9 +31,9 @@ namespace ExcelReader
                     "For getting report from all available files enter '.' character." + Environment.NewLine +
                     $"Here are availalbe files:");
 
-                for (int i = 0; i < allAvailalbeFilesNames.Count; i++)
+                for (int i = 0; i < allAvailableFilesNames.Count; i++)
                 {
-                    consolePrinter.PrintStringToConsole(allAvailalbeFilesNames[i]);
+                    consolePrinter.PrintStringToConsole(allAvailableFilesNames[i]);
                 }
 
                 var fileNames = Console.ReadLine();
