@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
-using System.Linq;
 
 namespace ExcelReader
 {
@@ -35,26 +34,6 @@ namespace ExcelReader
             for (int i = 0; i < allFiles.Length; i++)
             {
                 fileNames.Add(allFiles[i].Split(new string[] { defaultFolderName }, StringSplitOptions.None)[1]);
-            }
-
-            return fileNames;
-        }
-
-        public List<string> GetListOfFilesNamesFromUserInput(string userInput)
-        {
-            List<string> fileNames = new List<string>();
-
-            if (userInput == ".")
-            {
-                fileNames = GetAllExcelFileNamesFromFolder();
-            }
-            else if (userInput.Contains(","))
-            {
-                fileNames = userInput.Split(',').ToList();
-            }
-            else
-            {
-                fileNames.Add(userInput);
             }
 
             return fileNames;

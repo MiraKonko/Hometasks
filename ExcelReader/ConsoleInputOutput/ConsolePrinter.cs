@@ -2,9 +2,9 @@
 
 namespace ExcelReader
 {
-    public class ConsolePrinter
+    public class ConsolePrinter : IConsolePrinter
     {
-        public void PrintStringToConsole(string stringToPrint)
+        public void PrintToConsole(string stringToPrint)
         {
             Console.WriteLine(stringToPrint);
         }

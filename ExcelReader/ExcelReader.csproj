@@ -69,7 +69,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="DTOs\BookDto.cs" />
-    <Compile Include="ConsolePrinter.cs" />
     <Compile Include="FileReaders\ExcelReader.cs" />
     <Compile Include="FileReaders\FileReader.cs" />
     <Compile Include="BooksStoreReports.cs" />
@@ -77,6 +76,10 @@
     <Compile Include="DTOs\AuthorDto.cs" />
     <Compile Include="DataStorage\BookStorage.cs" />
     <Compile Include="FileExport\BookReportExport.cs" />
+    <Compile Include="ConsoleInputOutput\IConsolePrinter.cs" />
+    <Compile Include="ConsoleInputOutput\ConsolePrinter.cs" />
+    <Compile Include="ConsoleInputOutput\IConsoleReader.cs" />
+    <Compile Include="ConsoleInputOutput\UserInputGetter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -89,101 +92,6 @@
     </None>
     <None Include="Readme.txt" />
     <None Include="TestData\BookStore1.xlsx" />
-    <None Include="ASPNetSpellInclude\translations\yi.js" />
-    <None Include="ASPNetSpellInclude\translations\vi.js" />
-    <None Include="ASPNetSpellInclude\translations\uk.js" />
-    <None Include="ASPNetSpellInclude\translations\tw.js" />
-    <None Include="ASPNetSpellInclude\translations\tr.js" />
-    <None Include="ASPNetSpellInclude\translations\tl.js" />
-    <None Include="ASPNetSpellInclude\translations\th.js" />
-    <None Include="ASPNetSpellInclude\translations\template.js" />
-    <None Include="ASPNetSpellInclude\translations\sw.js" />
-    <None Include="ASPNetSpellInclude\translations\sr.js" />
-    <None Include="ASPNetSpellInclude\translations\sq.js" />
-    <None Include="ASPNetSpellInclude\translations\sl.js" />
-    <None Include="ASPNetSpellInclude\translations\sk.js" />
-    <None Include="ASPNetSpellInclude\translations\simple.js" />
-    <None Include="ASPNetSpellInclude\translations\ru.js" />
-    <None Include="ASPNetSpellInclude\translations\ro.js" />
-    <None Include="ASPNetSpellInclude\translations\pt.js" />
-    <None Include="ASPNetSpellInclude\translations\pl.js" />
-    <None Include="ASPNetSpellInclude\translations\no.js" />
-    <None Include="ASPNetSpellInclude\translations\nl.js" />
-    <None Include="ASPNetSpellInclude\translations\mt.js" />
-    <None Include="ASPNetSpellInclude\translations\ms.js" />
-    <None Include="ASPNetSpellInclude\translations\mk.js" />
-    <None Include="ASPNetSpellInclude\translations\lv.js" />
-    <None Include="ASPNetSpellInclude\translations\lt.js" />
-    <None Include="ASPNetSpellInclude\translations\ko.js" />
-    <None Include="ASPNetSpellInclude\translations\ja.js" />
-    <None Include="ASPNetSpellInclude\translations\iw.js" />
-    <None Include="ASPNetSpellInclude\translations\it.js" />
-    <None Include="ASPNetSpellInclude\translations\is.js" />
-    <None Include="ASPNetSpellInclude\translations\id.js" />
-    <None Include="ASPNetSpellInclude\translations\hu.js" />
-    <None Include="ASPNetSpellInclude\translations\hr.js" />
-    <None Include="ASPNetSpellInclude\translations\hi.js" />
-    <None Include="ASPNetSpellInclude\translations\gl.js" />
-    <None Include="ASPNetSpellInclude\translations\ga.js" />
-    <None Include="ASPNetSpellInclude\translations\fr.js" />
-    <None Include="ASPNetSpellInclude\translations\fi.js" />
-    <None Include="ASPNetSpellInclude\translations\fa.js" />
-    <None Include="ASPNetSpellInclude\translations\et.js" />
-    <None Include="ASPNetSpellInclude\translations\es.js" />
-    <None Include="ASPNetSpellInclude\translations\en.js" />
-    <None Include="ASPNetSpellInclude\translations\el.js" />
-    <None Include="ASPNetSpellInclude\translations\de.js" />
-    <None Include="ASPNetSpellInclude\translations\da.js" />
-    <None Include="ASPNetSpellInclude\translations\cy.js" />
-    <None Include="ASPNetSpellInclude\translations\cs.js" />
-    <None Include="ASPNetSpellInclude\translations\cn.js" />
-    <None Include="ASPNetSpellInclude\translations\ca.js" />
-    <None Include="ASPNetSpellInclude\translations\bg.js" />
-    <None Include="ASPNetSpellInclude\translations\be.js" />
-    <None Include="ASPNetSpellInclude\translations\ar.js" />
-    <None Include="ASPNetSpellInclude\translations\af.js" />
-    <None Include="ASPNetSpellInclude\themes\modern\xp.gif" />
-    <None Include="ASPNetSpellInclude\themes\modern\wiggle.png" />
-    <None Include="ASPNetSpellInclude\themes\modern\ieonly.css" />
-    <None Include="ASPNetSpellInclude\themes\modern\gwiggle.png" />
-    <None Include="ASPNetSpellInclude\themes\modern\dialog-window.css" />
-    <None Include="ASPNetSpellInclude\themes\modern\context-menu.css" />
-    <None Include="ASPNetSpellInclude\themes\modern\ajax-loader.gif" />
-    <None Include="ASPNetSpellInclude\themes\clean\wiggle.png" />
-    <None Include="ASPNetSpellInclude\themes\clean\ieonly.css" />
-    <None Include="ASPNetSpellInclude\themes\clean\gwiggle.png" />
-    <None Include="ASPNetSpellInclude\themes\clean\dialog-window.css" />
-    <None Include="ASPNetSpellInclude\themes\clean\context-menu.css" />
-    <None Include="ASPNetSpellInclude\themes\clean\ajax-loader.gif" />
-    <None Include="ASPNetSpellInclude\themes\classic\wiggle.png" />
-    <None Include="ASPNetSpellInclude\themes\classic\ieonly.css" />
-    <None Include="ASPNetSpellInclude\themes\classic\gwiggle.png" />
-    <None Include="ASPNetSpellInclude\themes\classic\dialog-window.css" />
-    <None Include="ASPNetSpellInclude\themes\classic\context-menu.css" />
-    <None Include="ASPNetSpellInclude\themes\classic\ajax-loader.gif" />
-    <None Include="ASPNetSpellInclude\themes\buttons\spelliconover.gif" />
-    <None Include="ASPNetSpellInclude\themes\buttons\spellicon.gif" />
-    <None Include="ASPNetSpellInclude\themes\bright\ieonly.css" />
-    <None Include="ASPNetSpellInclude\themes\bright\dialog-window.css" />
-    <None Include="ASPNetSpellInclude\themes\bright\context-menu.css" />
-    <None Include="ASPNetSpellInclude\themes\bright\ajax-loader.gif" />
-    <None Include="ASPNetSpellInclude\support.txt" />
-    <None Include="ASPNetSpellInclude\license.txt" />
-    <None Include="ASPNetSpellInclude\include.js" />
-    <None Include="ASPNetSpellInclude\dictionaries\README.txt" />
-    <None Include="ASPNetSpellInclude\dictionaries\language-rules\enforced-corrections.txt" />
-    <None Include="ASPNetSpellInclude\dictionaries\language-rules\common-mistakes.txt" />
-    <None Include="ASPNetSpellInclude\dictionaries\language-rules\banned-words.txt" />
-    <None Include="ASPNetSpellInclude\dictionaries\English %28International%29.dic" />
-    <None Include="ASPNetSpellInclude\dictionaries\custom.txt" />
-    <None Include="ASPNetSpellInclude\dialog.html" />
-    <None Include="ASPNetSpellInclude\debugging-test-scripts\Test-Server-Ajax.aspx" />
-    <None Include="ASPNetSpellInclude\debugging-test-scripts\Test-Instalation.ashx" />
-    <None Include="ASPNetSpellInclude\debugging-test-scripts\support.txt" />
-    <None Include="ASPNetSpellInclude\debugging-test-scripts\Hello-World.aspx" />
-    <None Include="ASPNetSpellInclude\core\dialog.js" />
-    <None Include="ASPNetSpellInclude\core\Default.aspx" />
-    <None Include="ASPNetSpellInclude\core\default.ashx" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -196,6 +104,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="FileExport\" />
+    <Folder Include="ConsoleInputOutput\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
