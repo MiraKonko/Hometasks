@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 namespace ExcelReader.CachedDataStorage
 {
     public class BookStorage
     {
-        public List<BookDto> StoredBooks { get; set; }
+        public static List<BookDto> StoredBooks { get; set; }
     }
 }

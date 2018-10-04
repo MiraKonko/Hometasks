@@ -6,7 +6,7 @@ namespace ExcelReader.ConsoleInputOutput
 {
     public class UserInputGetter : IConsoleReader, IConsolePrinter
     {
-        public string GetReportNumber()
+        public string GetReportCode()
         {
             ShowAvailableReportOptions();
             PrintToConsole("Enter report number:");
@@ -26,18 +26,18 @@ namespace ExcelReader.ConsoleInputOutput
         {
             PrintToConsole("Please, enter file name for report (with .xlsx or .xls part)." + Environment.NewLine);
             ShowMultipleFilesForReportOptions();
-            ShowAvailableFilesForReport();
+            ShowAllAvailableFilesForReport();
 
-            var fileNames = GetUserInput();
+            string fileNames = GetUserInput();
             List<string> fileNamesForReport = GetListOfFileNamesFromInput(fileNames);
 
             return fileNamesForReport;
         }
 
-        private void ShowAvailableFilesForReport()
+        private void ShowAllAvailableFilesForReport()
         {
             var fileReader = new FileReader();
-            var allAvailableFileNames = fileReader.GetAllExcelFileNamesFromFolder();
+            List<string> allAvailableFileNames = fileReader.GetAllExcelFileNamesFromFolder();
 
             for (int i = 0; i < allAvailableFileNames.Count; i++)
             {
@@ -49,18 +49,22 @@ namespace ExcelReader.ConsoleInputOutput
         {
             PrintToConsole("For getting report from several files - enter file names separated by comma" + Environment.NewLine +
                         "For getting report from all available files enter '.' character." + Environment.NewLine +
-                        $"Here are availalbe files:");
+                        $"Here are available files:");
         }
 
         private List<string> GetListOfFileNamesFromInput(string userInput)
         {
+            var isAllFilesRequested = userInput == ".";
+            var isMultipleFilesRequested = userInput.Contains(",");
+
             List<string> fileNames = new List<string>();
             var fileReader = new FileReader();
-            if (userInput == ".")
+
+            if (isAllFilesRequested)
             {
                 fileNames = fileReader.GetAllExcelFileNamesFromFolder();
             }
-            else if (userInput.Contains(","))
+            else if (isMultipleFilesRequested)
             {
                 fileNames = userInput.Split(',').ToList();
             }
@@ -81,6 +85,13 @@ namespace ExcelReader.ConsoleInputOutput
         {
             var userInput = Console.ReadLine();
             return userInput;
+        }
+
+        public string GetBookGenre()
+        {
+            PrintToConsole("Enter genre...");
+            string genre = GetUserInput();
+            return genre;
         }
     }
 }

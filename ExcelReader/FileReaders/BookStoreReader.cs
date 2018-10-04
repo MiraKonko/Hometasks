@@ -1,4 +1,5 @@
 ﻿using ExcelReader.CachedDataStorage;
+using ExcelReader.ConsoleInputOutput;
 using ExcelReader.EntityMappers;
 using OfficeOpenXml;
 using System.Collections.Generic;
@@ -8,37 +9,46 @@ namespace ExcelReader.FileReaders
 {
     public class BookStoreReader
     {
-        public void ReadAndStoreListOfBooksFromExcel(List<string> fileNames, int sheetNumber)
+        private const int defaultSheetNumber = 1;
+        private UserInputGetter _userInputGetter = new UserInputGetter();
+
+        public void ReadAndStoreListOfBooksFromExcel()
         {
-            List<BookDto> listOfBooks = GetListOfBooksFromMultipleExcels(fileNames, sheetNumber);
-            new BookStorage().StoredBooks = listOfBooks;
+            List<BookDto> listOfBooks = GetListOfBooksFromMultipleExcels();
+            BookStorage.StoredBooks = listOfBooks;
         }
 
-        public List<BookDto> GetListOfBooksFromMultipleExcels(List<string> fileNames, int sheetNumber)
+        private List<BookDto> GetListOfBooksFromMultipleExcels()
         {
+            List<string> fileNames = _userInputGetter.GetFileNamesForReport();
+
             List<BookDto> listOfBooks = new List<BookDto>();
             for (int i = 0; i < fileNames.Count(); i++)
             {
-                listOfBooks.AddRange(GetListOfBooksFromExcel(fileNames[i], sheetNumber));
+                listOfBooks.AddRange(GetListOfBooksFromExcel(fileNames[i]));
             }
+
             return listOfBooks;
         }
 
-        public List<BookDto> GetListOfBooksFromExcel(string fileName, int sheetNumber)
+        private List<BookDto> GetListOfBooksFromExcel(string fileName)
         {
             using (ExcelPackage package = new ExcelReader().GetExcelPackage(fileName))
             {
-                ExcelWorksheet worksheet = package.Workbook.Worksheets[sheetNumber];
-                List<BookDto> ListOfBooks = new List<BookDto>();
-                var lastRow = worksheet.Dimension.End.Row;
+                ExcelWorksheet worksheet = package.Workbook.Worksheets[defaultSheetNumber];
+                List<BookDto> listOfBooks = new List<BookDto>();
 
-                for (int i = 2; i <= lastRow; i++)
+                int rowToStartIndex = 2;
+                int lastRowIndex = worksheet.Dimension.End.Row;
+                var entityMapper = new EntityMapper();
+
+                for (int i = rowToStartIndex; i <= lastRowIndex; i++)
                 {
-                    var book = new EntityMapper().MapExcelDataToBookDto(worksheet, i);
-                    ListOfBooks.Add(book);
+                    var book = entityMapper.MapExcelDataToBookDto(worksheet, i);
+                    listOfBooks.Add(book);
                 }
 
-                return ListOfBooks;
+                return listOfBooks;
             }
         }
     }
