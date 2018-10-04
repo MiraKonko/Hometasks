@@ -68,7 +68,7 @@
     <Compile Include="DTOs\BookDto.cs" />
     <Compile Include="FileReaders\ExcelReader.cs" />
     <Compile Include="FileReaders\FileReader.cs" />
-    <Compile Include="BooksStoreReports.cs" />
+    <Compile Include="Reports\BooksStoreReports.cs" />
     <Compile Include="EntityMappers\EntityMapper.cs" />
     <Compile Include="DTOs\AuthorDto.cs" />
     <Compile Include="DataStorage\BookStorage.cs" />
@@ -77,6 +77,8 @@
     <Compile Include="ConsoleInputOutput\ConsolePrinter.cs" />
     <Compile Include="ConsoleInputOutput\IConsoleReader.cs" />
     <Compile Include="ConsoleInputOutput\UserInputGetter.cs" />
+    <Compile Include="Enums\BookStoreReportTypes.cs" />
+    <Compile Include="Reports\ReportStrategy.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

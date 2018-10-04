@@ -6,20 +6,41 @@ namespace ExcelReader.ConsoleInputOutput
 {
     public class UserInputGetter : IConsoleReader, IConsolePrinter
     {
-        public string GetReportCode()
+        private FileReader _fileReader = new FileReader();
+
+        public string GetUserInput()
+        {
+            var userInput = Console.ReadLine();
+            return userInput;
+        }
+
+        public void PrintToConsole(string output)
+        {
+            Console.WriteLine(output);
+        }
+
+        public string GetBookGenre()
+        {
+            PrintToConsole("Enter genre...");
+            string genre = GetUserInput();
+            return genre;
+        }
+
+        public int GetReportCode()
         {
             ShowAvailableReportOptions();
             PrintToConsole("Enter report number:");
-            string reportTypeCode = GetUserInput();
+            int reportTypeCode;
+            int.TryParse(GetUserInput(), out reportTypeCode);
             return reportTypeCode;
         }
 
         private void ShowAvailableReportOptions()
         {
-            PrintToConsole("For getting list of books by genre - enter 1." + Environment.NewLine +
-                                          "For getting the most profitable author - enter 2." + Environment.NewLine +
-                                          "For getting list of available authors - enter 3." + Environment.NewLine +
-                                          "For getting not filtered list of books - enter 4." + Environment.NewLine);
+            PrintToConsole($"For getting list of books by genre - enter {(int)BookStoreReportTypes.ByGenre}." + Environment.NewLine +
+                                          $"For getting the most profitable author - enter {(int)BookStoreReportTypes.TheMostProfitableAuthor}." + Environment.NewLine +
+                                          $"For getting list of available authors - enter {(int)BookStoreReportTypes.AvailableAuthors}." + Environment.NewLine +
+                                          $"For getting not filtered list of books - enter {(int)BookStoreReportTypes.AllBooks}." + Environment.NewLine);
         }
 
         public List<string> GetFileNamesForReport()
@@ -36,8 +57,7 @@ namespace ExcelReader.ConsoleInputOutput
 
         private void ShowAllAvailableFilesForReport()
         {
-            var fileReader = new FileReader();
-            List<string> allAvailableFileNames = fileReader.GetAllExcelFileNamesFromFolder();
+            List<string> allAvailableFileNames = _fileReader.GetAllExcelFileNamesFromFolder();
 
             for (int i = 0; i < allAvailableFileNames.Count; i++)
             {
@@ -58,11 +78,10 @@ namespace ExcelReader.ConsoleInputOutput
             var isMultipleFilesRequested = userInput.Contains(",");
 
             List<string> fileNames = new List<string>();
-            var fileReader = new FileReader();
 
             if (isAllFilesRequested)
             {
-                fileNames = fileReader.GetAllExcelFileNamesFromFolder();
+                fileNames = _fileReader.GetAllExcelFileNamesFromFolder();
             }
             else if (isMultipleFilesRequested)
             {
@@ -74,24 +93,6 @@ namespace ExcelReader.ConsoleInputOutput
             }
 
             return fileNames;
-        }
-
-        public void PrintToConsole(string output)
-        {
-            Console.WriteLine(output);
-        }
-
-        public string GetUserInput()
-        {
-            var userInput = Console.ReadLine();
-            return userInput;
-        }
-
-        public string GetBookGenre()
-        {
-            PrintToConsole("Enter genre...");
-            string genre = GetUserInput();
-            return genre;
         }
     }
 }
