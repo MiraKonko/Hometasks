@@ -12,23 +12,24 @@ namespace ExcelReader.FileReaders
         private const int defaultSheetNumber = 1;
         private UserInputGetter _userInputGetter = new UserInputGetter();
 
-        public void ReadAndStoreListOfBooksFromExcel()
-        {
-            List<BookDto> listOfBooks = GetListOfBooksFromMultipleExcels();
-            BookStorage.StoredBooks = listOfBooks;
-        }
-
-        private List<BookDto> GetListOfBooksFromMultipleExcels()
+        public void ReadAndStoreListOfBooksFromFiles()
         {
             List<string> fileNames = _userInputGetter.GetFileNamesForReport();
 
-            List<BookDto> listOfBooks = new List<BookDto>();
             for (int i = 0; i < fileNames.Count(); i++)
             {
-                listOfBooks.AddRange(GetListOfBooksFromExcel(fileNames[i]));
+                if (!IsFileContentPresentInStorage(fileNames[i]))
+                {
+                    List<BookDto> listOfBooks = GetListOfBooksFromExcel(fileNames[i]);
+                    BookStorage.SavedBookStorages.Add(fileNames[i], listOfBooks);
+                }
             }
+        }
 
-            return listOfBooks;
+        private bool IsFileContentPresentInStorage(string fileName)
+        {
+            var isFileInStorage = BookStorage.SavedBookStorages.Keys.Contains(fileName);
+            return isFileInStorage;
         }
 
         private List<BookDto> GetListOfBooksFromExcel(string fileName)

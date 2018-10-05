@@ -15,11 +15,16 @@ namespace ExcelReader.Reports
 
         private List<string> GetListOfAvailableAuthors()
         {
-            var listAvailableAuthors = BookStorage.StoredBooks.Where(book => book.IsAvailalbe).Select(book => book.Author.ToString()).Distinct().ToList();
+            var listAvailableAuthors = BookStorage.ListOfBooks.Where(book => book.IsAvailable)
+                .Select(book => book.Author.ToString())
+                .Distinct()
+                .ToList();
+
             if (listAvailableAuthors.Count == 0)
             {
                 throw new Exception("There is no available author!");
             }
+
             return listAvailableAuthors;
         }
     }

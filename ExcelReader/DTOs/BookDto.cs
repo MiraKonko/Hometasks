@@ -12,7 +12,7 @@ namespace ExcelReader
 
         public int Price { get; set; }
 
-        public bool IsAvailalbe { get; set; }
+        public bool IsAvailable { get; set; }
 
         public string Genre { get; set; }
 
@@ -32,7 +32,7 @@ namespace ExcelReader
                       .Append($"Author: {Author.ToString()},")
                       .Append($"Title: {Title},")
                       .Append($"Price: {Price.ToString()},")
-                      .Append($"Available: {IsAvailalbe.ToString()},")
+                      .Append($"Available: {IsAvailable.ToString()},")
                       .Append($"Genre: {Genre},")
                       .Append($"Available Books Count: {AvailableBooksCount.ToString()},")
                       .Append($"Sold Books Count: {SoldBooksCount.ToString()},")

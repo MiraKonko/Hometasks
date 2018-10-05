@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.IO;
 
 namespace ExcelReader
 {
     public class FileReader
     {
-        public string defaultFolderName = ConfigurationSettings.AppSettings["defaultTestDataDirectory"];
+        public const string defaultFolderName = "/TestData/";
 
         public string BuildFullPathToFile(string fileName, string fileDirectory = null)
         {

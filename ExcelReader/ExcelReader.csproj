@@ -33,6 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -57,9 +61,8 @@
     <Reference Include="System.Security" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FileReaders\BookStoreReader.cs" />
+    <Compile Include="BookStoreReader.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -68,20 +71,24 @@
     <Compile Include="DTOs\BookDto.cs" />
     <Compile Include="FileReaders\ExcelReader.cs" />
     <Compile Include="FileReaders\FileReader.cs" />
-    <Compile Include="Reports\BooksStoreReports.cs" />
+    <Compile Include="ReportExport\ReportToJsonExport.cs" />
+    <Compile Include="Reports\AvailableAuthorsReport.cs" />
+    <Compile Include="Reports\BooksByGenreReport.cs" />
+    <Compile Include="Reports\BooksStoreReportsGetter.cs" />
     <Compile Include="EntityMappers\EntityMapper.cs" />
     <Compile Include="DTOs\AuthorDto.cs" />
     <Compile Include="DataStorage\BookStorage.cs" />
-    <Compile Include="FileExport\BookReportExport.cs" />
+    <Compile Include="ReportExport\IReportExport.cs" />
     <Compile Include="ConsoleInputOutput\IConsolePrinter.cs" />
     <Compile Include="ConsoleInputOutput\ConsolePrinter.cs" />
     <Compile Include="ConsoleInputOutput\IConsoleReader.cs" />
     <Compile Include="ConsoleInputOutput\UserInputGetter.cs" />
     <Compile Include="Enums\BookStoreReportTypes.cs" />
-    <Compile Include="Reports\ReportStrategy.cs" />
+    <Compile Include="Reports\IReportStrategy.cs" />
+    <Compile Include="Reports\MostProfitableAuthorsReport.cs" />
+    <Compile Include="Reports\NotFilteredBooksReport.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

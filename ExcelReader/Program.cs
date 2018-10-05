@@ -8,29 +8,29 @@ namespace ExcelReader
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to report loader!");
+            Console.WriteLine("Welcome to report loader! Press any key to start...");
 
             while (Console.ReadKey(true).Key != ConsoleKey.Escape)
             {
-                try
-                {
-                    new BookStoreReader().ReadAndStoreListOfBooksFromExcel();
-                    List<string> report = new BooksStoreReports().GetReportByReportTypeCode();
+                //try
+                //{
+                new BookStoreReader().ReadAndStoreListOfBooksFromFiles();
+                List<string> report = new BooksStoreReportGetter().GetReportByReportTypeCode();
 
-                    var consolePrinter = new ConsolePrinter();
-                    for (int i = 0; i < report.Count; i++)
-                    {
-                        consolePrinter.PrintToConsole(report[i]);
-                    }
-                }
-                catch (Exception ex)
+                var consolePrinter = new ConsolePrinter();
+                for (int i = 0; i < report.Count; i++)
                 {
-                    Console.WriteLine($"Something went wrong! {ex.Message}, additional info: {ex.InnerException?.Message}.");
+                    consolePrinter.PrintToConsole(report[i]);
                 }
-                finally
-                {
-                    Console.WriteLine("Please, press any key to try again!");
-                }
+                //}
+                //catch (Exception ex)
+                //{
+                //    Console.WriteLine($"Something went wrong! {ex.Message}, additional info: {ex.InnerException?.Message}.");
+                //}
+                //finally
+                //{
+                //    Console.WriteLine("Please, press any key to try again!");
+                //}
 
             };
             Environment.Exit(0);

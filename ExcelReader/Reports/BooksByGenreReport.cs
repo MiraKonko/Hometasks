@@ -19,7 +19,7 @@ namespace ExcelReader.Reports
 
         private List<string> GetListOfBooksByGenre(string genre)
         {
-            var filteredListOfBooks = BookStorage.StoredBooks.Where(book => book.Genre.ToLower() == genre.ToLower()).Select(book => book.ToString()).ToList();
+            var filteredListOfBooks = BookStorage.ListOfBooks.Where(book => book.Genre.ToLower() == genre.ToLower()).Select(book => book.ToString()).ToList();
             if (filteredListOfBooks.Count == 0)
             {
                 throw new Exception($"There is no book with genre '{genre}'!");
