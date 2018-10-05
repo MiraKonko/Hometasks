@@ -6,7 +6,7 @@ namespace ExcelReader
 {
     public class FileReader
     {
-        public const string defaultFolderName = "/TestData/";
+        public const string defaultNameOfFolderWithData = "/TestData/";
 
         public string BuildFullPathToFile(string fileName, string fileDirectory = null)
         {
@@ -18,7 +18,7 @@ namespace ExcelReader
 
         public string BuildFullPathToFolder(string folderName = null)
         {
-            var directory = folderName ?? defaultFolderName;
+            var directory = folderName ?? defaultNameOfFolderWithData;
             string pathToFolder = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + directory;
 
             return pathToFolder;
@@ -32,7 +32,7 @@ namespace ExcelReader
 
             for (int i = 0; i < allFiles.Length; i++)
             {
-                fileNames.Add(allFiles[i].Split(new string[] { defaultFolderName }, StringSplitOptions.None)[1]);
+                fileNames.Add(allFiles[i].Split(new string[] { defaultNameOfFolderWithData }, StringSplitOptions.None)[1]);
             }
 
             return fileNames;

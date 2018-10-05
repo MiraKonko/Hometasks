@@ -94,5 +94,12 @@ namespace ExcelReader.ConsoleInputOutput
 
             return fileNames;
         }
+
+        public string AskForReportSaving()
+        {
+            PrintToConsole("If you like to save this report to txt file = click 's' button, if not click any other key...");
+            var userInput = GetUserInput();
+            return userInput;
+        }
     }
 }

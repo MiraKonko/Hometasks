@@ -1,4 +1,5 @@
 ﻿using ExcelReader.FileReaders;
+using ExcelReader.ReportExport;
 using System;
 using System.Collections.Generic;
 
@@ -22,6 +23,9 @@ namespace ExcelReader
                 {
                     consolePrinter.PrintToConsole(report[i]);
                 }
+
+                new ReportSaver(new BookstoreReportExpotToTxt()).SaveReportToFile(report);
+
                 //}
                 //catch (Exception ex)
                 //{
