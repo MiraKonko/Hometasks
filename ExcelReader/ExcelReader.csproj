@@ -61,34 +61,33 @@
     <Reference Include="System.Security" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BookStoreReader.cs" />
+    <Compile Include="Abstractions\IReportPrinter.cs" />
+    <Compile Include="Abstractions\IReportReaderFactory.cs" />
+    <Compile Include="BookStore\BookStoreReader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="DTOs\BookDto.cs" />
-    <Compile Include="FileReaders\ExcelReader.cs" />
-    <Compile Include="FileReaders\FileReader.cs" />
-    <Compile Include="ReportExport\BookstoreReportExpotToTxt.cs" />
-    <Compile Include="ReportExport\BookstoreReportExpotToJson.cs" />
-    <Compile Include="ReportExport\ReportSaver.cs" />
-    <Compile Include="Reports\AvailableAuthorsReport.cs" />
-    <Compile Include="Reports\BooksByGenreReport.cs" />
-    <Compile Include="Reports\BooksStoreReportsGetter.cs" />
+    <Compile Include="Reports\ReportCreator.cs" />
+    <Compile Include="Reports\ReportPrintingStrategy.cs" />
+    <Compile Include="Reports\ReportPrint\ReportPrintToTxt.cs" />
+    <Compile Include="Reports\ReportPrint\ReportPrintToJson.cs" />
+    <Compile Include="Reports\ReportPrint\ReportPrintStrategy.cs" />
+    <Compile Include="Reports\ReportPrint\ConsoleReportPrinter.cs" />
+    <Compile Include="Reports\ReportTypes\AvailableAuthorsReportReader.cs" />
+    <Compile Include="Reports\ReportTypes\BooksByGenreReportReader.cs" />
+    <Compile Include="Reports\BooksStoreReportFactory.cs" />
     <Compile Include="EntityMappers\EntityMapper.cs" />
-    <Compile Include="DTOs\AuthorDto.cs" />
     <Compile Include="DataStorage\BookStorage.cs" />
-    <Compile Include="ReportExport\IReportExporter.cs" />
-    <Compile Include="ConsoleInputOutput\IConsolePrinter.cs" />
-    <Compile Include="ConsoleInputOutput\ConsolePrinter.cs" />
-    <Compile Include="ConsoleInputOutput\IConsoleReader.cs" />
-    <Compile Include="ConsoleInputOutput\UserInputGetter.cs" />
-    <Compile Include="Enums\BookStoreReportTypes.cs" />
-    <Compile Include="Reports\IReportStrategy.cs" />
-    <Compile Include="Reports\MostProfitableAuthorsReport.cs" />
-    <Compile Include="Reports\NotFilteredBooksReport.cs" />
+    <Compile Include="Reports\ReportPrint\ReportPrintToFileTemplate.cs" />
+    <Compile Include="Abstractions\IConsolePrinter.cs" />
+    <Compile Include="Abstractions\IConsoleReader.cs" />
+    <Compile Include="ConsoleInputOutput\ConsoleReaderPrinter.cs" />
+    <Compile Include="Abstractions\IReportReader.cs" />
+    <Compile Include="Reports\ReportTypes\MostProfitableAuthorsReportReader.cs" />
+    <Compile Include="Reports\ReportTypes\NotFilteredBooksReportReader.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -97,7 +96,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Include="Readme.txt" />
-    <None Include="TestData\BookStore1.xlsx">
+    <None Include="BookStore\TestData\BookStore1.xlsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
@@ -105,14 +104,23 @@
     <Folder Include="ExportedReports\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="TestData\BookStore2.xlsx">
+    <Content Include="BookStore\TestData\BookStore2.xlsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\BookStore3.xlsx">
+    <Content Include="BookStore\TestData\BookStore3.xlsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\ExcelReaderModels\ExcelReaderModels.csproj">
+      <Project>{712DD780-C4AD-45C6-9C0C-C2C667B4FF60}</Project>
+      <Name>ExcelReaderModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infrastructure\ExcelReaderInfrastructure.csproj">
+      <Project>{F8EB3CD5-B550-4CF2-B4B7-56B7C47F14D3}</Project>
+      <Name>ExcelReaderInfrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

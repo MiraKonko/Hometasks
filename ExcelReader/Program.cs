@@ -1,7 +1,10 @@
-﻿using ExcelReader.FileReaders;
-using ExcelReader.ReportExport;
+﻿using ExcelReader.ConsoleInputOutput;
+using ExcelReader.EntityMappers;
+using ExcelReader.FileReaders;
+using ExcelReader.Reports;
+using ExcelReader.Reports.ReportSaving;
+using ExcelReaderModels.DTOs;
 using System;
-using System.Collections.Generic;
 
 namespace ExcelReader
 {
@@ -15,16 +18,28 @@ namespace ExcelReader
             {
                 try
                 {
-                    new BookStoreReader().ReadAndStoreListOfBooksFromFiles();
-                    List<string> report = new BooksStoreReportGetter().GetReportByReportTypeCode();
+                    var fileReader = new FileReader();
+                    var consoleReaderPrinter = new ConsoleReaderPrinter(fileReader);
+                    var entityMapper = new EntityMapper();
 
-                    var consolePrinter = new ConsolePrinter();
-                    for (int i = 0; i < report.Count; i++)
+                    new BookStoreReader(consoleReaderPrinter, entityMapper).ReadAndStoreListOfBooksFromFiles();
+                    var reportFactory = new BooksStoreReportFactory(consoleReaderPrinter);
+                    var reportCreator = new ReportCreator(reportFactory);
+
+                    ReportDto report = reportCreator.GetReport();
+                    var printOption = consoleReaderPrinter.GetPrintToOption();
+
+                    new ReportPrintStrategy().PrintReport(printOption, report);
+                    if (printOption == "c")
                     {
-                        consolePrinter.PrintToConsole(report[i]);
-                    }
+                        var isReportSavingRequired = consoleReaderPrinter.IsReportSavingRequired();
 
-                    new ReportSaver(new BookstoreReportExpotToTxt()).SaveReportToFile(report);
+                        if (isReportSavingRequired)
+                        {
+                            var exportOption = consoleReaderPrinter.GetExportToFileOption();
+                            new ReportPrintStrategy().PrintReport(exportOption, report);
+                        }
+                    }
 
                 }
                 catch (Exception ex)

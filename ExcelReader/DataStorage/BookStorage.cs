@@ -16,7 +16,7 @@ namespace ExcelReader.CachedDataStorage
             }
         }
 
-        public static List<BookDto> ListOfBooks
+        public static List<BookDto> Instance
         {
             get
             {

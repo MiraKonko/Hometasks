@@ -1,0 +1,24 @@
+Id: 1,Author: J.K. Rowling,Title: Harry Potter and the Cursed Child,Price: 75,Available: True,Genre: Fantasy,Available Books Count: 1,Sold Books Count: 100,Total Sold Price: 7500.
+Id: 2,Author: J.K. Rowling,Title: Fantastic Beasts And Where To Find Them,Price: 110,Available: False,Genre: Fantasy,Available Books Count: 0,Sold Books Count: 90,Total Sold Price: 9900.
+Id: 3,Author: J.R. Tolkien,Title: Silmarillion,Price: 160,Available: False,Genre: Fantasy,Available Books Count: 1,Sold Books Count: 140,Total Sold Price: 22400.
+Id: 4,Author: J.R. Tolkien,Title: Lord Of The Ring: Two Towers,Price: 100,Available: True,Genre: Fantasy,Available Books Count: 15,Sold Books Count: 200,Total Sold Price: 20000.
+Id: 5,Author: Stephen King,Title: Shining,Price: 80,Available: True,Genre: Horror,Available Books Count: 0,Sold Books Count: 200,Total Sold Price: 16000.
+Id: 6,Author: Ray Bradbury,Title: Fahrenheit 451,Price: 80,Available: False,Genre: Dystopian  Fiction,Available Books Count: 5,Sold Books Count: 180,Total Sold Price: 14400.
+Id: 7,Author: Ray Bradbury,Title: Dandelion Wine,Price: 120,Available: False,Genre: Fiction,Available Books Count: 10,Sold Books Count: 150,Total Sold Price: 18000.
+Id: 8,Author: Stephen King,Title: It,Price: 160,Available: True,Genre: Horror,Available Books Count: 15,Sold Books Count: 140,Total Sold Price: 22400.
+Id: 9,Author: Herman Mellwill,Title: Mobi Dick,Price: 110,Available: True,Genre: Fiction,Available Books Count: 5,Sold Books Count: 50,Total Sold Price: 5500.
+Id: 1,Author: J.K. Rowling,Title: Harry Potter and The Chamber of Secrets,Price: 75,Available: True,Genre: Fantasy,Available Books Count: 1,Sold Books Count: 100,Total Sold Price: 7500.
+Id: 2,Author: J.K. Rowling,Title: Harry Potter and The Goblet Of Fire,Price: 110,Available: False,Genre: Fantasy,Available Books Count: 0,Sold Books Count: 90,Total Sold Price: 9900.
+Id: 3,Author: J.R. Tolkien,Title: Lord Of The Ring: Fellowship Of The Ring,Price: 160,Available: True,Genre: Fantasy,Available Books Count: 1,Sold Books Count: 140,Total Sold Price: 22400.
+Id: 4,Author: J.R. Tolkien,Title: Lord Of The Ring: Return Of The King,Price: 100,Available: True,Genre: Fantasy,Available Books Count: 15,Sold Books Count: 200,Total Sold Price: 20000.
+Id: 5,Author: Stephen King,Title: Doctor Sleep,Price: 80,Available: False,Genre: Horror,Available Books Count: 0,Sold Books Count: 200,Total Sold Price: 16000.
+Id: 6,Author: Ray Bradbury,Title: Martian Chronicles,Price: 80,Available: True,Genre: Fantasy,Available Books Count: 5,Sold Books Count: 180,Total Sold Price: 14400.
+Id: 7,Author: Ray Bradbury,Title: Dandelion Wine,Price: 120,Available: False,Genre: Fiction,Available Books Count: 10,Sold Books Count: 150,Total Sold Price: 18000.
+Id: 8,Author: Stephen King,Title: Dark Tower: Wasted Lands,Price: 115,Available: True,Genre: Fantasy,Available Books Count: 15,Sold Books Count: 140,Total Sold Price: 16100.
+Id: 9,Author: Stephen King,Title: Dark Tower: Song Of Susanne,Price: 110,Available: True,Genre: Fantasy,Available Books Count: 5,Sold Books Count: 50,Total Sold Price: 5500.
+Id: 1,Author: J.K. Rowling,Title: Harry Potter and the Order Of Phenix ,Price: 75,Available: True,Genre: Fantasy,Available Books Count: 1,Sold Books Count: 100,Total Sold Price: 7500.
+Id: 2,Author: J.K. Rowling,Title: Harry Potter and the Half-Blood Prince,Price: 110,Available: True,Genre: Fantasy,Available Books Count: 0,Sold Books Count: 90,Total Sold Price: 9900.
+Id: 3,Author: M. Mitchell,Title: Gone With The Wind,Price: 160,Available: True,Genre: Fiction,Available Books Count: 1,Sold Books Count: 140,Total Sold Price: 22400.
+Id: 4,Author: R. P.Warren,Title: All The King’s Man,Price: 100,Available: True,Genre: Fiction,Available Books Count: 15,Sold Books Count: 200,Total Sold Price: 20000.
+Id: 5,Author: A.C. Doyle,Title: Study In Scarlet,Price: 80,Available: True,Genre: Detective,Available Books Count: 0,Sold Books Count: 200,Total Sold Price: 16000.
+Id: 6,Author: J. Orwell,Title: 1984,Price: 80,Available: True,Genre: Dystopian  Fiction,Available Books Count: 5,Sold Books Count: 180,Total Sold Price: 14400.

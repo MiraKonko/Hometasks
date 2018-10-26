@@ -1,4 +1,4 @@
-﻿using ExcelReader.ReportExport;
+﻿using ExcelReader;
 using NUnit.Framework;
 using System.Collections.Generic;
 
@@ -10,12 +10,13 @@ namespace ExcelReaderUnitTests
         [Test]
         public void VerifyThatTxtFileIsPresentInDirectoryAfterSaving()
         {
-            var reportSaver = new BookstoreReportExpotToTxt();
-            var testData = new List<string> { "tes1", "test2" };
+            // var reportSaver = new ReportExportToTxt();
+            //var testData = new List<string> { "tes1", "test2" };
 
-            reportSaver.SaveBookReportToFile(testData);
+            //reportSaver.SaveReportToFile(testData);
 
-            List<string> txtFilesInDirectory = new List<string>();
+            var fileReader = new FileReader();
+            List<string> txtFilesInDirectory = fileReader.GetAllFileNamesFromFolder();
 
             Assert.IsNotEmpty(txtFilesInDirectory, "No txt file was found after report saving in the directory!");
         }
