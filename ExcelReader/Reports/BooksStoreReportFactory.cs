@@ -7,9 +7,9 @@ namespace ExcelReader
 {
     public class BooksStoreReportFactory : IReportReaderFactory
     {
-        private ConsoleReaderPrinter _consoleReaderPrinter;
+        private UserInputInterpretator _consoleReaderPrinter;
 
-        public BooksStoreReportFactory(ConsoleReaderPrinter consoleReaderPrinter)
+        public BooksStoreReportFactory(UserInputInterpretator consoleReaderPrinter)
         {
             _consoleReaderPrinter = consoleReaderPrinter;
         }

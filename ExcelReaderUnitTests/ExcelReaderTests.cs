@@ -1,4 +1,6 @@
 ﻿using ExcelReader;
+using ExcelReader.ReportExport;
+using ExcelReaderModels.DTOs;
 using NUnit.Framework;
 using System.Collections.Generic;
 
@@ -10,10 +12,10 @@ namespace ExcelReaderUnitTests
         [Test]
         public void VerifyThatTxtFileIsPresentInDirectoryAfterSaving()
         {
-            // var reportSaver = new ReportExportToTxt();
-            //var testData = new List<string> { "tes1", "test2" };
+            var reportSaver = new ReportPrintToTxt();
+            var testData = new ReportDto { Name = "TxtTestReport", ReportContent = new List<string> { "test1, test2" } };
 
-            //reportSaver.SaveReportToFile(testData);
+            reportSaver.PrintReport(testData);
 
             var fileReader = new FileReader();
             List<string> txtFilesInDirectory = fileReader.GetAllFileNamesFromFolder();

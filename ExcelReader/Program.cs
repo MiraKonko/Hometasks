@@ -4,6 +4,7 @@ using ExcelReader.FileReaders;
 using ExcelReader.Reports;
 using ExcelReader.Reports.ReportSaving;
 using ExcelReaderModels.DTOs;
+using Ninject;
 using System;
 
 namespace ExcelReader
@@ -18,28 +19,22 @@ namespace ExcelReader
             {
                 try
                 {
-                    var fileReader = new FileReader();
-                    var consoleReaderPrinter = new ConsoleReaderPrinter(fileReader);
-                    var entityMapper = new EntityMapper();
+                    IKernel kernel = new StandardKernel();
+                    var fileReader = kernel.Get<FileReader>();
+                    var consoleReaderPrinter = kernel.Get<ConsoleReaderPrinter>();
+                    var userInputInterpretator = kernel.Get<UserInputInterpretator>();
+                    var entityMapper = kernel.Get<EntityMapper>();
+                    var bookStoreReader = kernel.Get<BookStoreReader>();
+                    var reportFactory = kernel.Get<BooksStoreReportFactory>();
+                    var reportCreator = kernel.Get<ReportCreator>();
+                    var reportPrintingStrategy = kernel.Get<ReportPrintStrategy>();
 
-                    new BookStoreReader(consoleReaderPrinter, entityMapper).ReadAndStoreListOfBooksFromFiles();
-                    var reportFactory = new BooksStoreReportFactory(consoleReaderPrinter);
-                    var reportCreator = new ReportCreator(reportFactory);
-
+                    bookStoreReader.ReadAndStoreListOfBooksFromFiles();
                     ReportDto report = reportCreator.GetReport();
-                    var printOption = consoleReaderPrinter.GetPrintToOption();
+                    var printOption = userInputInterpretator.GetPrintToOption();
 
-                    new ReportPrintStrategy().PrintReport(printOption, report);
-                    if (printOption == "c")
-                    {
-                        var isReportSavingRequired = consoleReaderPrinter.IsReportSavingRequired();
-
-                        if (isReportSavingRequired)
-                        {
-                            var exportOption = consoleReaderPrinter.GetExportToFileOption();
-                            new ReportPrintStrategy().PrintReport(exportOption, report);
-                        }
-                    }
+                    reportPrintingStrategy.PrintReport(printOption, report);
+                    SaveReportIfRequired(userInputInterpretator, report, printOption);
 
                 }
                 catch (Exception ex)
@@ -53,6 +48,20 @@ namespace ExcelReader
 
             };
             Environment.Exit(0);
+        }
+
+        private static void SaveReportIfRequired(UserInputInterpretator userInputInterpretator, ReportDto report, string printOption)
+        {
+            if (printOption == "c")
+            {
+                var isReportSavingRequired = userInputInterpretator.IsReportSavingRequired();
+
+                if (isReportSavingRequired)
+                {
+                    var exportOption = userInputInterpretator.GetExportToFileOption();
+                    new ReportPrintStrategy().PrintReport(exportOption, report);
+                }
+            }
         }
     }
 }

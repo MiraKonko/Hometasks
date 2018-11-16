@@ -1,5 +1,4 @@
-﻿using ExcelReader;
-using ExcelReader.CachedDataStorage;
+﻿using ExcelReader.CachedDataStorage;
 using ExcelReader.ConsoleInputOutput;
 using ExcelReader.EntityMappers;
 using OfficeOpenXml;
@@ -11,19 +10,19 @@ namespace ExcelReader.FileReaders
     public class BookStoreReader
     {
         private const int defaultSheetNumber = 1;
-        private ConsoleReaderPrinter _consoleReaderPrinter;
+        private UserInputInterpretator _userInputInterpretator;
         private EntityMapper _entityMapper;
 
-        public BookStoreReader(ConsoleReaderPrinter consoleReaderPrinter, EntityMapper entityMapper)
+        public BookStoreReader(UserInputInterpretator userInputInterpretator, EntityMapper entityMapper)
         {
-            _consoleReaderPrinter = consoleReaderPrinter;
+            _userInputInterpretator = userInputInterpretator;
             _entityMapper = entityMapper;
         }
 
 
         public void ReadAndStoreListOfBooksFromFiles()
         {
-            List<string> fileNames = _consoleReaderPrinter.GetFileNamesForReport();
+            List<string> fileNames = _userInputInterpretator.GetFileNamesForReport();
 
             for (int i = 0; i < fileNames.Count(); i++)
             {
